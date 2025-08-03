@@ -10,8 +10,8 @@
     body {
       font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
       margin: 0;
-      background: url('./sfondo.webp') center center/contain no-repeat fixed, linear-gradient(120deg, #f7e9d0cc 0%, #f5c16ccc 100%);
-      background-size: contain, auto;
+      background: url('./sfondo.webp') center center/cover no-repeat fixed, linear-gradient(120deg, #f7e9d0cc 0%, #f5c16ccc 100%);
+      background-size: cover, auto;
       color: #222;
     }
 
@@ -153,6 +153,8 @@
           style="width: 220px; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
         <img src="./2.webp" alt="Grill Band" class="gallery-img"
           style="width: 220px; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
+        <img src="./3.webp" alt="Grill Band" class="gallery-img"
+          style="width: 220px; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
       </div>
 
       <h2>Video</h2>
@@ -160,20 +162,34 @@
           Marra</strong></h3>
       <div class="video-section"
         style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin: 2rem 0;">
-        <div style="flex:1 1 350px; min-width:320px; max-width:640px; text-align:center;">
-          <iframe src="https://www.lacplay.it/embed/76637_77201/" width="640" height="360" frameborder="0"
-            allowfullscreen scrolling="no" id="lac_player1"
-            style="max-width: 100%; border-radius: 12px; box-shadow: 0 2px 12px #0002;"></iframe>
+        <div class="lazy-iframe-container" data-src="https://www.lacplay.it/embed/76637_77201/"
+          style="flex:1 1 350px; min-width:320px; max-width:640px; text-align:center; position:relative;">
+          <div class="iframe-placeholder"
+            style="width:100%; aspect-ratio:16/9; background:#222 url('https://cms-v1.lacplay.it/wp-content/uploads/2025/06/Locandina-orizzontale-MARRA.jpg') center center no-repeat; background-size:contain; border-radius:12px; box-shadow:0 2px 12px #0002; display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative;">
+            <span style="display:inline-block; background:rgba(0,0,0,0.6); border-radius:50%; padding:18px;">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="24" fill="#b53b1b" />
+                <polygon points="19,15 37,24 19,33" fill="#fff" />
+              </svg>
+            </span>
+          </div>
           <div style="margin-top:0.5rem; font-size:1.1rem; color:#b53b1b;">
             Prima puntata.<br>
             <a href="https://www.lacplay.it/video/panza-chjina-fa-cantari_76637/panza-chjina-fa-cantari-st01-p05-la-grill-band-e-le-calabriselle-parte-i_77201/"
               target="_blank" style="color:#b53b1b; text-decoration:underline;">Link ufficiale</a>
           </div>
         </div>
-        <div style="flex:1 1 350px; min-width:320px; max-width:640px; text-align:center;">
-          <iframe src="https://www.lacplay.it/embed/76637_77361/" width="640" height="360" frameborder="0"
-            allowfullscreen scrolling="no" id="lac_player2"
-            style="max-width: 100%; border-radius: 12px; box-shadow: 0 2px 12px #0002;"></iframe>
+        <div class="lazy-iframe-container" data-src="https://www.lacplay.it/embed/76637_77361/"
+          style="flex:1 1 350px; min-width:320px; max-width:640px; text-align:center; position:relative;">
+          <div class="iframe-placeholder"
+            style="width:100%; aspect-ratio:16/9; background:#222 url('https://cms-v1.lacplay.it/wp-content/uploads/2025/06/Locandina-orizzontale-MARRA.jpg') center center no-repeat; background-size:contain; border-radius:12px; box-shadow:0 2px 12px #0002; display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative;">
+            <span style="display:inline-block; background:rgba(0,0,0,0.6); border-radius:50%; padding:18px;">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="24" fill="#b53b1b" />
+                <polygon points="19,15 37,24 19,33" fill="#fff" />
+              </svg>
+            </span>
+          </div>
           <div style="margin-top:0.5rem; font-size:1.1rem; color:#b53b1b;">
             Seconda puntata.<br>
             <a href="https://www.lacplay.it/video/panza-chjina-fa-cantari_76637/panza-chjina-fa-cantari-st01-p06-la-grill-band-e-le-calabriselle-parte-ii_77361/"
@@ -246,7 +262,7 @@
       <div class="contacts">
         <p>Per info e concerti:</p>
         <!-- <a href="mailto:grillband@email.com">grillband@email.com</a><br> -->
-        <span>Tel: <a href="tel:+393291185540">+39 329 1185540</a></span>
+        <span>Tel: <a href="tel:+393291185540">+39 329 1185540</a> (Nunzio)</span>
         <div class="socials">
           <a href="https://www.instagram.com/grill_band_melodie_meridionali" title="Instagram"
             style="display:inline-block; vertical-align:middle; margin-right: 0.5rem;">
@@ -316,6 +332,26 @@
             });
           }
         }
+
+        // Lazy load iframe LaC TV
+        document.querySelectorAll('.lazy-iframe-container').forEach(function (container) {
+          var placeholder = container.querySelector('.iframe-placeholder');
+          var src = container.getAttribute('data-src');
+          placeholder.addEventListener('click', function () {
+            if (container.querySelector('iframe')) return;
+            var iframe = document.createElement('iframe');
+            iframe.src = src;
+            iframe.width = '640';
+            iframe.height = '360';
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('scrolling', 'no');
+            iframe.style.maxWidth = '100%';
+            iframe.style.borderRadius = '12px';
+            iframe.style.boxShadow = '0 2px 12px #0002';
+            placeholder.replaceWith(iframe);
+          });
+        });
       });
     </script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script> -->
