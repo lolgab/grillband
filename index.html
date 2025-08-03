@@ -18,10 +18,16 @@
     header {
       background: #b53b1b;
       color: #fff;
-      padding: 2rem 0 1rem 0;
+      padding: 0 0 0.8rem 0;
       text-align: center;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       box-shadow: 0 2px 8px #0002;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      z-index: 1;
+      transition: top 0.3s;
     }
 
     header h1 {
@@ -32,13 +38,13 @@
 
     header p {
       margin: 0.5rem 0 0 0;
-      font-size: 1.2rem;
-      font-style: italic;
+      font-size: 1.5rem;
+      /* font-style: italic; */
     }
 
     .container {
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 5.5rem auto 2rem auto;
       background: #fff8f0cc;
       border-radius: 16px;
       box-shadow: 0 4px 24px #0001;
@@ -89,25 +95,46 @@
       color: #222;
     }
   </style>
+  <script>
+    // Nascondi header quando si scrolla verso il basso, mostra quando si scrolla verso l'alto
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          const header = document.querySelector('header');
+          if (!header) return;
+          if (window.scrollY > lastScrollY && window.scrollY > 80) {
+            header.style.top = '-320px';
+          } else {
+            header.style.top = '0';
+          }
+          lastScrollY = window.scrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  </script>
 </head>
 
 <body>
   </head>
 
   <body>
-    <audio id="bg-music" src="pacchianella.mp3" autoplay loop></audio>
+    <audio id="bg-music" src="pacchianella.mp3"></audio>
     <header>
       <img src="./logo.webp" alt="Logo Grill Band"
         style="max-width: 320px; width: 100%; display: block; margin-left: auto; margin-right: auto;">
       <!-- <h1>Grill Band</h1> -->
-      <p>Melodie Meridionali</p>
+      <p>Grill Band e le Calabriselle - Melodie Meridionali</p>
     </header>
     <div class="container">
       <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80"
         alt="Grill Band" class="band-photo">
 
       <section id="grill-band" style="margin-top:2.5rem;">
-        <h2>Grill Band - Tradizione che suona e danza</h2>
+        <h2>Grill Band e Le Calabriselle - Musica e danza popolare</h2>
         <p><strong>La Grill Band</strong> nasce a <strong>Santa Sofia d’Epiro</strong>, cuore pulsante dell’identità
           arbëreshe, da un sogno coltivato fin da ragazzi dai cugini <strong>Nunzio ed Ernesto Feraco</strong>, noti in
           paese con il soprannome di famiglia “<em>Grillo</em>”, da cui il gruppo prende il nome. Un sogno fatto di
@@ -150,11 +177,11 @@
       <h2>Galleria</h2>
       <div class="gallery" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
         <img src="./1.webp" alt="Grill Band" class="gallery-img"
-          style="width: 220px; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
+          style="width: 220px; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
         <img src="./2.webp" alt="Grill Band" class="gallery-img"
-          style="width: 220px; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
+          style="width: 220px; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
         <img src="./3.webp" alt="Grill Band" class="gallery-img"
-          style="width: 220px; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
+          style="width: 220px; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 8px #0002; cursor: pointer;">
       </div>
 
       <h2>Video</h2>
@@ -324,15 +351,79 @@
               btn.style.padding = '0.7em 1.2em';
               btn.style.fontSize = '1.1em';
               btn.style.cursor = 'pointer';
-              btn.onclick = function () {
+              // Funzione per mostrare il player audio flottante
+              function showAudioPlayer() {
+                // Mostra un player audio flottante con controlli
+                var playerBox = document.createElement('div');
+                playerBox.style.position = 'fixed';
+                playerBox.style.bottom = '24px';
+                playerBox.style.right = '24px';
+                playerBox.style.zIndex = 3000;
+                playerBox.style.background = '#fff8f0';
+                playerBox.style.border = '2px solid #b53b1b';
+                playerBox.style.borderRadius = '12px';
+                playerBox.style.boxShadow = '0 2px 12px #0003';
+                playerBox.style.padding = '1em 1.5em 1em 1em';
+                playerBox.style.display = 'flex';
+                playerBox.style.alignItems = 'center';
+                playerBox.style.gap = '1em';
+                // Bottone chiudi
+                var closeBtn = document.createElement('button');
+                closeBtn.textContent = '✕';
+                closeBtn.style.background = 'none';
+                closeBtn.style.border = 'none';
+                closeBtn.style.fontSize = '1.3em';
+                closeBtn.style.color = '#b53b1b';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.onclick = function () {
+                  playerBox.remove();
+                  audio.pause();
+                  // Ricrea il pulsante Ascoltaci
+                  createAscoltaciButton();
+                };
+                // Player audio con controlli
+                var audioPlayer = document.createElement('audio');
+                audioPlayer.src = audio.src;
+                audioPlayer.controls = true;
+                audioPlayer.autoplay = true;
+                audioPlayer.style.verticalAlign = 'middle';
+                audioPlayer.style.width = '220px';
+                // Sincronizza play/pausa tra i due player
+                audioPlayer.onplay = function () { audio.play(); };
+                audioPlayer.onpause = function () { audio.pause(); };
+                audioPlayer.onseeked = function () { audio.currentTime = audioPlayer.currentTime; };
+                audio.onplay = function () { audioPlayer.play(); };
+                audio.onpause = function () { audioPlayer.pause(); };
+                audio.ontimeupdate = function () { if (Math.abs(audioPlayer.currentTime - audio.currentTime) > 0.5) audioPlayer.currentTime = audio.currentTime; };
+                playerBox.appendChild(audioPlayer);
+                playerBox.appendChild(closeBtn);
+                document.body.appendChild(playerBox);
                 audio.play();
-                btn.remove();
-              };
-              document.body.appendChild(btn);
-            });
+              }
+
+              // Funzione per creare il pulsante Ascoltaci
+              function createAscoltaciButton() {
+                var btn = document.createElement('button');
+                btn.textContent = '▶ Ascoltaci';
+                btn.style.position = 'fixed';
+                btn.style.bottom = '24px';
+                btn.style.right = '24px';
+                btn.style.zIndex = 2000;
+                btn.style.background = '#b53b1b';
+                btn.style.color = '#fff';
+                btn.style.border = 'none';
+                btn.style.borderRadius = '8px';
+                btn.style.padding = '0.7em 1.2em';
+                btn.style.fontSize = '1.1em';
+                btn.style.cursor = 'pointer';
+                btn.onclick = showAudioPlayer;
+                document.body.appendChild(btn);
+              }
+
+              createAscoltaciButton();
+      });
           }
         }
-
         // Lazy load iframe LaC TV
         document.querySelectorAll('.lazy-iframe-container').forEach(function (container) {
           var placeholder = container.querySelector('.iframe-placeholder');
