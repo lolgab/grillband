@@ -229,98 +229,72 @@
       // Avvia la musica di sottofondo se permesso dal browser
       window.addEventListener('DOMContentLoaded', function () {
         var audio = document.getElementById('bg-music');
-        if (audio) {
-          // Alcuni browser richiedono interazione utente per l'audio
-          var playPromise = audio.play();
-          if (playPromise !== undefined) {
-            playPromise.catch(function () {
-              // Mostra un piccolo pulsante se l'autoplay viene bloccato
-              var btn = document.createElement('button');
-              btn.textContent = '▶ Ascoltaci';
-              btn.style.position = 'fixed';
-              btn.style.bottom = '24px';
-              btn.style.right = '24px';
-              btn.style.zIndex = 2000;
-              btn.style.background = '#b53b1b';
-              btn.style.color = '#fff';
-              btn.style.border = 'none';
-              btn.style.borderRadius = '8px';
-              btn.style.padding = '0.7em 1.2em';
-              btn.style.fontSize = '1.1em';
-              btn.style.cursor = 'pointer';
-              // Funzione per mostrare il player audio flottante
-              function showAudioPlayer() {
-                // Mostra un player audio flottante con controlli
-                var playerBox = document.createElement('div');
-                playerBox.style.position = 'fixed';
-                playerBox.style.bottom = '24px';
-                playerBox.style.right = '24px';
-                playerBox.style.zIndex = 3000;
-                playerBox.style.background = '#fff8f0';
-                playerBox.style.border = '2px solid #b53b1b';
-                playerBox.style.borderRadius = '12px';
-                playerBox.style.boxShadow = '0 2px 12px #0003';
-                playerBox.style.padding = '1em 1.5em 1em 1em';
-                playerBox.style.display = 'flex';
-                playerBox.style.alignItems = 'center';
-                playerBox.style.gap = '1em';
-                // Bottone chiudi
-                var closeBtn = document.createElement('button');
-                closeBtn.textContent = '✕';
-                closeBtn.style.background = 'none';
-                closeBtn.style.border = 'none';
-                closeBtn.style.fontSize = '1.3em';
-                closeBtn.style.color = '#b53b1b';
-                closeBtn.style.cursor = 'pointer';
-                closeBtn.onclick = function () {
-                  playerBox.remove();
-                  audio.pause();
-                  // Ricrea il pulsante Ascoltaci
-                  createAscoltaciButton();
-                };
-                // Player audio con controlli
-                var audioPlayer = document.createElement('audio');
-                audioPlayer.src = audio.src;
-                audioPlayer.controls = true;
-                audioPlayer.autoplay = true;
-                audioPlayer.style.verticalAlign = 'middle';
-                audioPlayer.style.width = '220px';
-                // Sincronizza play/pausa tra i due player
-                audioPlayer.onplay = function () { audio.play(); };
-                audioPlayer.onpause = function () { audio.pause(); };
-                audioPlayer.onseeked = function () { audio.currentTime = audioPlayer.currentTime; };
-                audio.onplay = function () { audioPlayer.play(); };
-                audio.onpause = function () { audioPlayer.pause(); };
-                audio.ontimeupdate = function () { if (Math.abs(audioPlayer.currentTime - audio.currentTime) > 0.5) audioPlayer.currentTime = audio.currentTime; };
-                playerBox.appendChild(audioPlayer);
-                playerBox.appendChild(closeBtn);
-                document.body.appendChild(playerBox);
-                audio.play();
-              }
-
-              // Funzione per creare il pulsante Ascoltaci
-              function createAscoltaciButton() {
-                var btn = document.createElement('button');
-                btn.textContent = '▶ Ascoltaci';
-                btn.style.position = 'fixed';
-                btn.style.bottom = '24px';
-                btn.style.right = '24px';
-                btn.style.zIndex = 2000;
-                btn.style.background = '#b53b1b';
-                btn.style.color = '#fff';
-                btn.style.border = 'none';
-                btn.style.borderRadius = '8px';
-                btn.style.padding = '0.7em 1.2em';
-                btn.style.fontSize = '1.1em';
-                btn.style.cursor = 'pointer';
-                btn.onclick = showAudioPlayer;
-                document.body.appendChild(btn);
-              }
-
-              createAscoltaciButton();
-      });
-          }
+        if (!audio) return;
+        // Funzione per mostrare il player audio flottante
+        function showAudioPlayer() {
+          var playerBox = document.createElement('div');
+          playerBox.style.position = 'fixed';
+          playerBox.style.bottom = '24px';
+          playerBox.style.right = '24px';
+          playerBox.style.zIndex = 3000;
+          playerBox.style.background = '#fff8f0';
+          playerBox.style.border = '2px solid #b53b1b';
+          playerBox.style.borderRadius = '12px';
+          playerBox.style.boxShadow = '0 2px 12px #0003';
+          playerBox.style.padding = '1em 1.5em 1em 1em';
+          playerBox.style.display = 'flex';
+          playerBox.style.alignItems = 'center';
+          playerBox.style.gap = '1em';
+          // Bottone chiudi
+          var closeBtn = document.createElement('button');
+          closeBtn.textContent = '✕';
+          closeBtn.style.background = 'none';
+          closeBtn.style.border = 'none';
+          closeBtn.style.fontSize = '1.3em';
+          closeBtn.style.color = '#b53b1b';
+          closeBtn.style.cursor = 'pointer';
+          closeBtn.onclick = function () {
+            playerBox.remove();
+            audio.pause();
+            createAscoltaciButton();
+          };
+          // Player audio con controlli
+          var audioPlayer = document.createElement('audio');
+          audioPlayer.src = audio.src;
+          audioPlayer.controls = true;
+          audioPlayer.autoplay = true;
+          audioPlayer.style.verticalAlign = 'middle';
+          audioPlayer.style.width = '220px';
+          // Sincronizza play/pausa tra i due player
+          audioPlayer.onplay = function () { audio.play(); };
+          audioPlayer.onpause = function () { audio.pause(); };
+          audioPlayer.onseeked = function () { audio.currentTime = audioPlayer.currentTime; };
+          audio.onplay = function () { audioPlayer.play(); };
+          audio.onpause = function () { audioPlayer.pause(); };
+          audio.ontimeupdate = function () { if (Math.abs(audioPlayer.currentTime - audio.currentTime) > 0.5) audioPlayer.currentTime = audio.currentTime; };
+          playerBox.appendChild(audioPlayer);
+          playerBox.appendChild(closeBtn);
+          document.body.appendChild(playerBox);
         }
+        // Funzione per creare il pulsante Ascoltaci
+        function createAscoltaciButton() {
+          var btn = document.createElement('button');
+          btn.textContent = '▶ Ascoltaci';
+          btn.style.position = 'fixed';
+          btn.style.bottom = '24px';
+          btn.style.right = '24px';
+          btn.style.zIndex = 2000;
+          btn.style.background = '#b53b1b';
+          btn.style.color = '#fff';
+          btn.style.border = 'none';
+          btn.style.borderRadius = '8px';
+          btn.style.padding = '0.7em 1.2em';
+          btn.style.fontSize = '1.1em';
+          btn.style.cursor = 'pointer';
+          btn.onclick = showAudioPlayer;
+          document.body.appendChild(btn);
+        }
+        createAscoltaciButton();
         // Lazy load iframe LaC TV
         document.querySelectorAll('.lazy-iframe-container').forEach(function (container) {
           var placeholder = container.querySelector('.iframe-placeholder');
