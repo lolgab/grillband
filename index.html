@@ -21,31 +21,13 @@
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script>
-    // Nascondi header quando si scrolla verso il basso, mostra quando si scrolla verso l'alto
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    window.addEventListener('scroll', function () {
-      if (!ticking) {
-        window.requestAnimationFrame(function () {
-          const header = document.querySelector('header');
-          if (!header) return;
-          const topV = window.scrollY > 320 ? -320 : -window.scrollY
-          header.style.top = `${topV}px`;
-          lastScrollY = window.scrollY;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-  </script>
-</head>
+  <script src="./scroll.js"></script>
+</head >
 
 <body>
   </head>
 
   <body>
-    <audio id="bg-music" src="pacchianella.mp3"></audio>
     <header>
       <img src="./logo.webp" alt="Logo Grill Band"
         style="max-width: 320px; width: 100%; display: block; margin-left: auto; margin-right: auto;">
@@ -232,8 +214,6 @@
     <script>
       // Avvia la musica di sottofondo se permesso dal browser
       window.addEventListener('DOMContentLoaded', function () {
-        var audio = document.getElementById('bg-music');
-        if (!audio) return;
         // Funzione per mostrare il player audio flottante
         function showAudioPlayer() {
           var playerBox = document.createElement('div');
@@ -259,23 +239,16 @@
           closeBtn.style.cursor = 'pointer';
           closeBtn.onclick = function () {
             playerBox.remove();
-            audio.pause();
             createAscoltaciButton();
           };
           // Player audio con controlli
           var audioPlayer = document.createElement('audio');
-          audioPlayer.src = audio.src;
+          audioPlayer.src = "./pacchianella.mp3";
           audioPlayer.controls = true;
           audioPlayer.autoplay = true;
           audioPlayer.style.verticalAlign = 'middle';
           audioPlayer.style.width = '220px';
-          // Sincronizza play/pausa tra i due player
-          audioPlayer.onplay = function () { audio.play(); };
-          audioPlayer.onpause = function () { audio.pause(); };
-          audioPlayer.onseeked = function () { audio.currentTime = audioPlayer.currentTime; };
-          audio.onplay = function () { audioPlayer.play(); };
-          audio.onpause = function () { audioPlayer.pause(); };
-          audio.ontimeupdate = function () { if (Math.abs(audioPlayer.currentTime - audio.currentTime) > 0.5) audioPlayer.currentTime = audio.currentTime; };
+
           playerBox.appendChild(audioPlayer);
           playerBox.appendChild(closeBtn);
           document.body.appendChild(playerBox);
@@ -319,9 +292,9 @@
           });
         });
       });
-    </script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script> -->
-    <script>
+  </script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script> -->
+  <script>
       // Lightbox/slideshow per la gallery
       const images = Array.from(document.querySelectorAll('.gallery-img'));
       const lightbox = document.getElementById('lightbox');
@@ -362,27 +335,27 @@
         if (e.target === lightbox) lightbox.style.display = 'none';
       });
 
-      // --- Codice video WebTorrent e fallback COMMENTATO ---
-      /*
-      const client = new WebTorrent();
-      const videos = [
-        {
-          element: document.getElementById('webtorrent-video-1'),
-          torrentId: 'magnet:?xt=urn:btih:6e4b6e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e&dn=video1.mp4' // ESEMPIO, sostituisci con il tuo
-        },
-        {
-          element: document.getElementById('webtorrent-video-2'),
-          torrentId: 'magnet:?xt=urn:btih:7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f&dn=video2.mp4' // ESEMPIO, sostituisci con il tuo
-        }
-      ];
-      videos.forEach(({element, torrentId}) => {
-        client.add(torrentId, torrent => {
-          const file = torrent.files.find(file => file.name.endsWith('.mp4'));
-          if (file) file.renderTo(element);
-        });
-      });
-      */
-    </script>
+              // --- Codice video WebTorrent e fallback COMMENTATO ---
+              /*
+              const client = new WebTorrent();
+              const videos = [
+                {
+                  element: document.getElementById('webtorrent-video-1'),
+                  torrentId: 'magnet:?xt=urn:btih:6e4b6e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e&dn=video1.mp4' // ESEMPIO, sostituisci con il tuo
+                },
+                {
+                  element: document.getElementById('webtorrent-video-2'),
+                  torrentId: 'magnet:?xt=urn:btih:7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f&dn=video2.mp4' // ESEMPIO, sostituisci con il tuo
+                }
+              ];
+              videos.forEach(({element, torrentId}) => {
+                client.add(torrentId, torrent => {
+                  const file = torrent.files.find(file => file.name.endsWith('.mp4'));
+                  if (file) file.renderTo(element);
+                });
+              });
+              */
+  </script>
   </body>
 
 </html>
