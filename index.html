@@ -2,11 +2,14 @@
 <html lang="en">
 
 <head>
-  <meta name="description" content="Grill Band e le Calabriselle: gruppo di musica popolare calabrese. Concerti, eventi, balli tradizionali e spettacoli folk nel Sud Italia. Scopri la formazione, i prossimi eventi e guarda foto e video delle esibizioni.">
-  <meta name="keywords" content="Grill Band, Calabriselle, musica popolare, folk, Calabria, concerti, eventi, balli tradizionali, gruppo musicale, sud Italia, spettacolo, tradizione, tarantella, band calabrese">
+  <meta name="description"
+    content="Grill Band e le Calabriselle: gruppo di musica popolare calabrese. Concerti, eventi, balli tradizionali e spettacoli folk nel Sud Italia. Scopri la formazione, i prossimi eventi e guarda foto e video delle esibizioni.">
+  <meta name="keywords"
+    content="Grill Band, Calabriselle, musica popolare, folk, Calabria, concerti, eventi, balli tradizionali, gruppo musicale, sud Italia, spettacolo, tradizione, tarantella, band calabrese">
   <meta name="author" content="Grill Band e le Calabriselle">
   <meta property="og:title" content="Grill Band e le Calabriselle - Musica popolare calabrese e arbëreshe">
-  <meta property="og:description" content="Gruppo di musica popolare e folk calabrese. Concerti, eventi, balli e spettacoli tradizionali nel Sud Italia.">
+  <meta property="og:description"
+    content="Gruppo di musica popolare e folk calabrese. Concerti, eventi, balli e spettacoli tradizionali nel Sud Italia.">
   <meta property="og:image" content="https://grillband.it/logo.webp">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://grillband.it/">
@@ -16,7 +19,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="./main.css" rel="stylesheet">
   <!-- Font Awesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script>
     // Nascondi header quando si scrolla verso il basso, mostra quando si scrolla verso l'alto
     let lastScrollY = window.scrollY;
@@ -26,11 +30,8 @@
         window.requestAnimationFrame(function () {
           const header = document.querySelector('header');
           if (!header) return;
-          if (window.scrollY > lastScrollY && window.scrollY > 300) {
-            header.style.top = '-320px';
-          } else {
-            header.style.top = '0';
-          }
+          const topV = window.scrollY > 320 ? -320 : -window.scrollY
+          header.style.top = `${topV}px`;
           lastScrollY = window.scrollY;
           ticking = false;
         });
@@ -213,13 +214,16 @@
         <!-- <a href="mailto:grillband@email.com">grillband@email.com</a><br> -->
         <span>Tel: <a href="tel:+393291185540">+39 329 1185540</a> (Nunzio)</span>
         <div class="socials">
-          <a href="https://www.instagram.com/grill_band_melodie_meridionali" title="Instagram" style="display:inline-block; vertical-align:middle; margin-right: 0.5rem; color:#d6249f; font-size:2rem;">
+          <a href="https://www.instagram.com/grill_band_melodie_meridionali" title="Instagram"
+            style="display:inline-block; vertical-align:middle; margin-right: 0.5rem; color:#d6249f; font-size:2rem;">
             <i class="fa-brands fa-instagram"></i>
           </a>
-          <a href="https://www.facebook.com/grill.band/" title="Facebook" style="display:inline-block; vertical-align:middle; margin-right: 0.5rem; color:#1877F2; font-size:2rem;">
+          <a href="https://www.facebook.com/grill.band/" title="Facebook"
+            style="display:inline-block; vertical-align:middle; margin-right: 0.5rem; color:#1877F2; font-size:2rem;">
             <i class="fa-brands fa-facebook"></i>
           </a>
-          <a href="https://www.youtube.com/@grillband5862" title="YouTube" style="display:inline-block; vertical-align:middle; color:#FF0000; font-size:2rem;">
+          <a href="https://www.youtube.com/@grillband5862" title="YouTube"
+            style="display:inline-block; vertical-align:middle; color:#FF0000; font-size:2rem;">
             <i class="fa-brands fa-youtube"></i>
           </a>
         </div>

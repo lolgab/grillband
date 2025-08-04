@@ -18,7 +18,6 @@ header {
   left: 0;
   width: 100vw;
   z-index: 1;
-  transition: top 0.4s;
 }
 
 header h1 {
@@ -35,11 +34,11 @@ header p {
 
 .container {
   max-width: 900px;
-  margin: 390px auto 2rem auto;
+  margin: 380px auto 1rem;
   background: #fff8f0cc;
   border-radius: 16px;
   box-shadow: 0 4px 24px #0001;
-  padding: 2rem;
+  padding: 1rem 2rem 1rem;
 }
 
 .band-photo {
