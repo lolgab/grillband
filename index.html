@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="./scroll.js"></script>
-</head >
+</head>
 
 <body>
   </head>
@@ -32,7 +32,7 @@
       <img src="./logo.webp" alt="Logo Grill Band"
         style="max-width: 320px; width: 100%; display: block; margin-left: auto; margin-right: auto;">
       <!-- <h1>Grill Band</h1> -->
-      <p>Grill Band e le Calabriselle - Melodie Meridionali</p>
+      <p>Grill Band e le Calabriselle</p>
     </header>
     <div class="container">
       <!-- <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80"
@@ -46,21 +46,12 @@
           musica popolare, tarantella, e radici calabresi che non hanno mai smesso di vibrare, neanche quando i capelli
           sono diventati bianchi.</p>
 
-        <p>Con la maturità e l’esperienza, quel sogno prende forma e voce in un progetto musicale autentico, che si
-          arricchisce dell'incontro con figure di spicco della scena musicale arbëreshe: <strong>Federico
-            Baffa</strong>, polistrumentista (fisarmonica, lira calabrese e fischietto d’oleandro) noto per la sua
-          militanza nella <em>Spasulati Band</em>, e <strong>Angelo “Bobo” Conte</strong>, voce e chitarra acustica
-          della storica <em>Peppa Marriti Band</em>.</p>
-
-        <p>A completare questo viaggio nella tradizione, arriva la forza e l’eleganza vocale del <strong>Maestro
-            Beatrice De Loria</strong>, originaria di Malvito, che con la sua <strong>voce e la chitarra
-            battente</strong> è diventata la vera frontwoman del gruppo.</p>
+        <p>Con la maturità e l’esperienza, quel sogno prende forma e voce in un progetto musicale autentico.</p>
 
         <h3>Formazione</h3>
         <ul>
-          <li><strong>Federico Baffa</strong> - Fisarmonica, lira calabrese, fischietto d’oleandro</li>
+          <li><strong>Daniele Masci</strong> - Voce</li>
           <li><strong>Angelo “Bobo” Conte</strong> - Chitarra acustica</li>
-          <li><strong>Beatrice De Loria</strong> - Voce e chitarra battente</li>
           <li><strong>Ernesto Feraco</strong> - Organetto</li>
           <li><strong>Nunzio Feraco</strong> - Percussioni</li>
           <li><strong>Lorenzo Gabriele</strong> - Basso elettrico</li>
@@ -72,7 +63,7 @@
         <p>La Grill Band non offre solo musica, ma uno spettacolo coinvolgente che unisce
           suono, canto e danza. Insieme al gruppo, si esibisce il corpo di ballo <strong>“Le Calabriselle”</strong>,
           formato da <strong>10 ballerine</strong> che durante i concerti animano la scena con danze popolari,
-          coinvolgendo il pubblico in un’atmosfera festosa e condivisa.
+          coinvolgendo il pubblic in un’atmosfera festosa e condivisa.
         </p>
 
         <p>La Grill Band è un viaggio nella memoria e nell’identità del Sud, un ponte tra generazioni che parla il
@@ -283,9 +274,9 @@
           });
         });
       });
-  </script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script> -->
-  <script>
+    </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script> -->
+    <script>
       // Lightbox/slideshow per la gallery
       const images = Array.from(document.querySelectorAll('.gallery-img'));
       const lightbox = document.getElementById('lightbox');
@@ -326,27 +317,27 @@
         if (e.target === lightbox) lightbox.style.display = 'none';
       });
 
-              // --- Codice video WebTorrent e fallback COMMENTATO ---
-              /*
-              const client = new WebTorrent();
-              const videos = [
-                {
-                  element: document.getElementById('webtorrent-video-1'),
-                  torrentId: 'magnet:?xt=urn:btih:6e4b6e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e&dn=video1.mp4' // ESEMPIO, sostituisci con il tuo
-                },
-                {
-                  element: document.getElementById('webtorrent-video-2'),
-                  torrentId: 'magnet:?xt=urn:btih:7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f&dn=video2.mp4' // ESEMPIO, sostituisci con il tuo
-                }
-              ];
-              videos.forEach(({element, torrentId}) => {
-                client.add(torrentId, torrent => {
-                  const file = torrent.files.find(file => file.name.endsWith('.mp4'));
-                  if (file) file.renderTo(element);
-                });
-              });
-              */
-  </script>
+      // --- Codice video WebTorrent e fallback COMMENTATO ---
+      /*
+      const client = new WebTorrent();
+      const videos = [
+        {
+          element: document.getElementById('webtorrent-video-1'),
+          torrentId: 'magnet:?xt=urn:btih:6e4b6e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e&dn=video1.mp4' // ESEMPIO, sostituisci con il tuo
+        },
+        {
+          element: document.getElementById('webtorrent-video-2'),
+          torrentId: 'magnet:?xt=urn:btih:7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f&dn=video2.mp4' // ESEMPIO, sostituisci con il tuo
+        }
+      ];
+      videos.forEach(({element, torrentId}) => {
+        client.add(torrentId, torrent => {
+          const file = torrent.files.find(file => file.name.endsWith('.mp4'));
+          if (file) file.renderTo(element);
+        });
+      });
+      */
+    </script>
   </body>
 
 </html>
