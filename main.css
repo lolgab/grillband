@@ -60,6 +60,11 @@ h2 {
   margin-top: 2rem;
 }
 
+h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .contacts {
   margin-top: 2rem;
   background: #f5c16c33;
