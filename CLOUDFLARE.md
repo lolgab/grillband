@@ -38,3 +38,9 @@ npx wrangler d1 execute grillband --remote --command "SELECT * FROM preventivi O
 
 Enable Email Routing on `grillband.it`, verify the destination address, then uncomment
 `send_email` and `vars` in `wrangler.jsonc`.
+
+## www redirect
+
+`www-redirect/` is a separate Worker (`grillband-www`, custom domain `www.grillband.it`) that
+301-redirects to `https://grillband.it`. Not deployed by Workers Builds; deploy manually:
+`cd www-redirect && npx wrangler deploy`.
