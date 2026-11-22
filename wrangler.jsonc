@@ -31,12 +31,16 @@
       "namespace_id": "1001",
       "simple": { "limit": 5, "period": 60 }
     }
-  ]
+  ],
 
-  // Optional email notification on each new request (needs Email Routing
-  // enabled on grillband.it and a verified destination address):
-  // "send_email": [
-  //   { "name": "NOTIFY", "destination_address": "INDIRIZZO@VERIFICATO.it" }
-  // ],
-  // "vars": { "NOTIFY_FROM": "preventivi@grillband.it", "NOTIFY_TO": "INDIRIZZO@VERIFICATO.it" }
+  // Email notification on each new request. Email Routing is enabled only on the
+  // notifiche.grillband.it subdomain, so the Aruba mail on grillband.it is untouched.
+  // The destination must be a verified Email Routing address.
+  "send_email": [
+    { "name": "NOTIFY", "destination_address": "lorenzolespaul@gmail.com" }
+  ],
+  "vars": {
+    "NOTIFY_FROM": "preventivi@notifiche.grillband.it",
+    "NOTIFY_TO": "lorenzolespaul@gmail.com"
+  }
 }

@@ -34,10 +34,12 @@ D1 migrations are not automatic: `npx wrangler d1 migrations apply grillband --r
 npx wrangler d1 execute grillband --remote --command "SELECT * FROM preventivi ORDER BY id DESC"
 ```
 
-## Optional email notification
+## Email notification
 
-Enable Email Routing on `grillband.it`, verify the destination address, then uncomment
-`send_email` and `vars` in `wrangler.jsonc`.
+Each new request is emailed to `NOTIFY_TO` (see `wrangler.jsonc`) via the `send_email`
+binding. Email Routing is enabled only on `notifiche.grillband.it` (its own MX/SPF), so the
+Aruba mail on `grillband.it` keeps working. A new recipient must first be added and
+verified as an Email Routing destination address.
 
 ## www redirect
 
