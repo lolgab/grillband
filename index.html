@@ -190,6 +190,10 @@
         <p>Per info e concerti:</p>
         <!-- <a href="mailto:grillband@email.com">grillband@email.com</a><br> -->
         <span>Tel: <a href="tel:+393291185540">+39 329 1185540</a> (Nunzio)</span>
+        <p>
+          <a class="whatsapp-btn" href="https://wa.me/393291185540?text=Ciao%2C%20vorrei%20informazioni%20per%20un%20concerto%20della%20Grill%20Band"
+            target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Scrivici su WhatsApp</a>
+        </p>
         <div class="socials">
           <a href="https://www.instagram.com/grill_band_melodie_meridionali" title="Instagram"
             style="display:inline-block; vertical-align:middle; margin-right: 0.5rem; color:#d6249f; font-size:2rem;">
@@ -205,7 +209,86 @@
           </a>
         </div>
       </div>
+
+      <h2 id="preventivo"><a href="#preventivo">Richiedi un preventivo</a></h2>
+      <p>Organizzi una festa, una sagra o un evento? Raccontaci cosa hai in mente e ti ricontattiamo.</p>
+      <form id="preventivo-form" class="preventivo-form">
+        <label>Nome e cognome / Ente *
+          <input name="nome" required maxlength="100" autocomplete="name">
+        </label>
+        <div class="form-row">
+          <label>Telefono
+            <input name="telefono" type="tel" maxlength="30" autocomplete="tel">
+          </label>
+          <label>Email
+            <input name="email" type="email" maxlength="120" autocomplete="email">
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Data dell'evento
+            <input name="data_evento" type="date">
+          </label>
+          <label>Luogo *
+            <input name="luogo" required maxlength="150" placeholder="Comune, località">
+          </label>
+        </div>
+        <label>Formula
+          <select name="formula">
+            <option value="concerto">Concerto Grill Band con le Calabriselle</option>
+            <option value="itinerante">Gruppo itinerante Le Calabriselle</option>
+            <option value="concerto+itinerante">Concerto + itinerante</option>
+            <option value="altro">Altro / non so ancora</option>
+          </select>
+        </label>
+        <label>Messaggio
+          <textarea name="messaggio" rows="4" maxlength="2000"
+            placeholder="Tipo di evento, orari, palco e impianto disponibili..."></textarea>
+        </label>
+        <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAGNbXPI102a3rNdo" data-language="it"></div>
+        <p class="form-hint">* obbligatori. Inserisci almeno telefono o email. I dati sono usati solo per
+          ricontattarti riguardo alla tua richiesta.</p>
+        <button type="submit">Invia richiesta</button>
+        <p id="preventivo-status" class="form-status" role="status"></p>
+      </form>
     </div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script>
+      (function () {
+        var form = document.getElementById('preventivo-form');
+        var status = document.getElementById('preventivo-status');
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          var data = new FormData(form);
+          if (!data.get('telefono') && !data.get('email')) {
+            status.textContent = 'Inserisci almeno telefono o email.';
+            status.className = 'form-status error';
+            return;
+          }
+          var btn = form.querySelector('button[type=submit]');
+          btn.disabled = true;
+          status.textContent = 'Invio in corso...';
+          status.className = 'form-status';
+          try {
+            var res = await fetch('/api/preventivo', { method: 'POST', body: data });
+            var out = await res.json().catch(function () { return {}; });
+            if (res.ok && out.ok) {
+              form.reset();
+              status.textContent = 'Richiesta inviata! Ti ricontatteremo al più presto.';
+              status.className = 'form-status success';
+            } else {
+              status.textContent = out.error || 'Errore durante l\'invio. Riprova o chiamaci.';
+              status.className = 'form-status error';
+            }
+          } catch (err) {
+            status.textContent = 'Errore di rete. Riprova o chiamaci.';
+            status.className = 'form-status error';
+          }
+          if (window.turnstile) turnstile.reset();
+          btn.disabled = false;
+        });
+      })();
+    </script>
     <script>
       // Avvia la musica di sottofondo se permesso dal browser
       window.addEventListener('DOMContentLoaded', function () {

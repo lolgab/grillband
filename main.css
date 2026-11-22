@@ -94,3 +94,79 @@ h2 a {
 .socials a:hover {
   color: #222;
 }
+.whatsapp-btn {
+  display: inline-block;
+  margin-top: 0.8rem;
+  background: #25d366;
+  color: #fff !important;
+  padding: 0.6em 1.1em;
+  border-radius: 8px;
+}
+
+.preventivo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  background: #f5c16c33;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.preventivo-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-weight: bold;
+  flex: 1;
+}
+
+.preventivo-form input,
+.preventivo-form select,
+.preventivo-form textarea {
+  font: inherit;
+  font-weight: normal;
+  padding: 0.5em;
+  border: 1px solid #c9a46a;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.preventivo-form .form-row {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.preventivo-form .form-row label {
+  min-width: 200px;
+}
+
+.preventivo-form button {
+  align-self: flex-start;
+  background: #b53b1b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 1.4em;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.preventivo-form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.preventivo-form .hp {
+  position: absolute;
+  left: -9999px;
+}
+
+.form-hint {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.form-status.success { color: #1d7a35; font-weight: bold; }
+.form-status.error { color: #b53b1b; font-weight: bold; }

@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "grillband",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+
+  // Static site served straight from the repo root (see .assetsignore).
+  // Only /api/* hits the Worker; static requests are free and unmetered.
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+
+  // grillband.it apex records are proxied (orange cloud), so a route is enough.
+  "routes": [{ "pattern": "grillband.it/*", "zone_name": "grillband.it" }],
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "grillband",
+      "database_id": "a44bc62f-7fb3-4d61-b155-098ba092cdd8",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // Max 5 form submissions per IP per minute.
+  "ratelimits": [
+    {
+      "name": "FORM_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 5, "period": 60 }
+    }
+  ]
+
+  // Optional email notification on each new request (needs Email Routing
+  // enabled on grillband.it and a verified destination address):
+  // "send_email": [
+  //   { "name": "NOTIFY", "destination_address": "INDIRIZZO@VERIFICATO.it" }
+  // ],
+  // "vars": { "NOTIFY_FROM": "preventivi@grillband.it", "NOTIFY_TO": "INDIRIZZO@VERIFICATO.it" }
+}
