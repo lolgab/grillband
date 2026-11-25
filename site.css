@@ -150,22 +150,22 @@ p + p { margin-top: 0.9em; }
 .scallop-y {
   --s: 22px;
   -webkit-mask:
-    radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 50% calc(var(--s) * -1) / calc(var(--s) * 2) 100% repeat-x, /* taste-skill-ignore: edge mask */
-    radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 50% var(--s) / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
+    radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 50% 0 / calc(var(--s) * 2) 100% repeat-x, /* taste-skill-ignore: edge mask */
+    radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 50% 100% / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
   -webkit-mask-composite: source-in; mask-composite: intersect;
   mask:
-    radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 50% calc(var(--s) * -1) / calc(var(--s) * 2) 100% repeat-x, /* taste-skill-ignore: edge mask */
-    radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 50% var(--s) / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
+    radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 50% 0 / calc(var(--s) * 2) 100% repeat-x, /* taste-skill-ignore: edge mask */
+    radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 50% 100% / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
 }
 .scallop-top {
   --s: 50px;
-  -webkit-mask: radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 50% calc(var(--s) * -1) / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
-  mask: radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 50% calc(var(--s) * -1) / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
+  -webkit-mask: radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 50% 0 / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
+  mask: radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 50% 0 / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
 }
 .scallop-bottom {
   --s: 14px;
-  -webkit-mask: radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 50% var(--s) / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
-  mask: radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 50% var(--s) / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
+  -webkit-mask: radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 50% 100% / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
+  mask: radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 50% 100% / calc(var(--s) * 2) 100% repeat-x; /* taste-skill-ignore: edge mask */
 }
 
 /* ---------- list: the printed programme sheet ---------- */
@@ -339,26 +339,17 @@ p + p { margin-top: 0.9em; }
   .clip img { display: none; }
 }
 
-/* ---------- gallery: prints with swing tags ---------- */
+/* ---------- gallery: prints ---------- */
 .prints__title { font-size: var(--step-head); margin-bottom: 40px; }
-.prints { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px var(--gutter); }
+.prints { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
 .prints--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .print button { display: block; width: 100%; text-align: left; }
 .print img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transition: transform 400ms var(--ease-out); }
 .print__frame { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) { .print button:hover img { transform: scale(1.04); } }
-.print__tag { min-height: 88px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; font-size: var(--step-small); line-height: 1.35; font-variant-numeric: tabular-nums; }
-.print__tag .row { display: flex; justify-content: space-between; gap: 0.75rem; }
-.print__tag strong { font-weight: 600; }
-.print:nth-child(4n+1) .print__tag { background: var(--ink); color: var(--on-ink); }
-.print:nth-child(4n+2) .print__tag { background: var(--paper); color: var(--ink); }
-.print:nth-child(4n+3) .print__tag { background: var(--accent); color: var(--accent-ink); }
-.print:nth-child(4n+4) .print__tag { background: var(--surface); color: var(--ink); }
 @media (max-width: 860px) {
-  .prints { grid-template-columns: 1fr 1fr; gap: 20px 8px; }
+  .prints { grid-template-columns: 1fr 1fr; gap: 8px; }
   .prints__title { margin-bottom: 24px; }
-  .print__tag .row + .row { display: none; }
-  .print__tag { min-height: 0; }
 }
 
 /* lightbox (it floats, so it may have depth) */
@@ -412,7 +403,7 @@ p + p { margin-top: 0.9em; }
 .postcard h2 { font-size: var(--step-head); }
 .postcard__msg p { margin-top: 1.25rem; max-width: 38ch; }
 .postcard__addr { position: relative; padding-top: 0; display: flex; flex-direction: column; gap: 12px; }
-.postcard__addr ul { display: flex; flex-direction: column; gap: 12px; margin-top: 0.25rem; }
+.postcard__addr ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; margin-top: 0.25rem; }
 .postcard__addr a { font-weight: 600; text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .postcard__addr a:hover { color: var(--accent); } }
 .postcard__stamp { position: absolute; top: 0; right: 0; width: 88px; padding: 6px; background: var(--paper); outline: 6px solid var(--surface); outline-offset: -6px; }
@@ -420,7 +411,7 @@ p + p { margin-top: 0.9em; }
 .postcard__imprint { grid-column: 1 / -1; text-align: center; font-size: var(--step-small); color: var(--muted); align-self: end; padding-top: 2rem; }
 @media (max-width: 860px) {
   .postcard { grid-template-columns: 1fr; padding-top: calc(50px + 2rem); }
-  .postcard__stamp { width: 64px; top: -6.5rem; }
+  .postcard__stamp { width: 64px; top: 0; }
 }
 
 /* ---------- the listening button (floats, fixed) ---------- */
