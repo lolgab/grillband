@@ -51,9 +51,13 @@ async function notify(env, r) {
     "",
     r.messaggio || "",
   ].join("\r\n");
+  // Replying goes to the requester, not to the notifiche.grillband.it sender (no mailbox).
+  // r.email is validated without whitespace, so it cannot inject headers.
+  const replyTo = r.email ? [`Reply-To: ${encodeHeader(r.nome)} <${r.email}>`] : [];
   const raw = [
     `From: Sito Grill Band <${env.NOTIFY_FROM}>`,
     `To: ${env.NOTIFY_TO}`,
+    ...replyTo,
     `Subject: ${encodeHeader(`Richiesta preventivo: ${r.luogo}`)}`,
     `Date: ${new Date().toUTCString()}`,
     `Message-ID: <${crypto.randomUUID()}@grillband.it>`,
